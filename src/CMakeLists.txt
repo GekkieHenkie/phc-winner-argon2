@@ -59,10 +59,13 @@ else()
 endif()
 
 install(TARGETS argon2-shared
-    ARCHIVE  DESTINATION ${CMAKE_INSTALL_LIBDIR}
-    LIBRARY  DESTINATION ${CMAKE_INSTALL_LIBDIR}
-    RUNTIME  DESTINATION ${CMAKE_INSTALL_BINDIR}
-    )
+        EXPORT argon2-shared
+        ARCHIVE  DESTINATION ${CMAKE_INSTALL_LIBDIR}
+        LIBRARY  DESTINATION ${CMAKE_INSTALL_LIBDIR}
+        RUNTIME  DESTINATION ${CMAKE_INSTALL_BINDIR}
+        )
+
+install(EXPORT argon2-shared DESTINATION cmake)
 
 if (UNIX)
     macro(install_symlink filepath sympath)
@@ -105,9 +108,10 @@ set_target_properties(argon2-static PROPERTIES
     PDB_OUTPUT_NAME "argon2")
 
 install(TARGETS argon2-static
-    ARCHIVE  DESTINATION ${CMAKE_INSTALL_LIBDIR}
-    )
-
+        EXPORT argon2-static
+        ARCHIVE  DESTINATION ${CMAKE_INSTALL_LIBDIR}
+        )
+install(EXPORT argon2-static DESTINATION cmake)
 
 install(FILES "${CMAKE_SOURCE_DIR}/include/argon2.h"
     DESTINATION ${CMAKE_INSTALL_INCLUDEDIR})
